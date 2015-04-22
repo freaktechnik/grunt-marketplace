@@ -41,13 +41,13 @@ module.exports = function(grunt) {
             }
             else {
                 return client.validatePackage(filepath).then(client.publish, function(error) {
-                    grunt.log.warn(error);
+                    grunt.log.error(error);
                     callback(error);
                 }).then(function(appId) {
-                    grunt.log.writeln('Successfully published the application '+appId);
+                    grunt.log.ok('Successfully published the application '+appId);
                     callback();
                 }, function(error) {
-                    grunt.log.warn(error);
+                    grunt.log.error(error);
                     callback(error);
                 });
             }
