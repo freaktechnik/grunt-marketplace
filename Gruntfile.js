@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    marketplaceCreds: grunt.file.readJSON('.fxmarketplace'),
     jshint: {
       all: [
         'Gruntfile.js',
@@ -30,24 +31,14 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     marketplace: {
-      default_options: {
-        options: {
-          key: 'nobody@mozilla.org',
-          secret: ''
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
+      options: {
+        consumerKey: '<%= marketplaceCreds.consumerKey %>',
+        consumerSecret: '<%= marketplaceCreds.consumerSecret %>',
+        environment: 'production'
       },
-      custom_options: {
-        options: {
-          key: 'nobody@mozilla.org',
-          secret: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      }
+      web: [
+        'manifest.webapp'
+      ]
     },
 
     // Unit tests.
