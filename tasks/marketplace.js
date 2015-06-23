@@ -55,9 +55,9 @@ module.exports = function(grunt) {
                     consumerSecret: options.consumerSecret,
                     path: filepath,
                     type: target
-                };
+                };                
 
-                publish(filepath)
+                publish(opts)
                 .then(function(app) {
                     grunt.log.verbose.ok('Successfully published the application '+app.id);
                     callback();
