@@ -9,7 +9,7 @@
 
 'use strict';
 
-var MarketplaceClient = require("node-firefox-marketplace");
+var { publish } = require("fx-marketplace-publish");
 var async = require("async");
 
 module.exports = function(grunt) {
@@ -34,8 +34,6 @@ module.exports = function(grunt) {
             grunt.fail.warn("You must provide a key and secret for the Firefox Marketplace API");
         }
 
-        var client = new MarketplaceClient(options);
-
         async.each(this.filesSrc, function(filepath, callback) {
             // Warn on and remove invalid source files (if nonull was set).
             if (!grunt.file.exists(filepath)) {
@@ -51,17 +49,19 @@ module.exports = function(grunt) {
                 callback("Not porovided with a manifest");
             }
             else {
-                var validate = client.validateManifest;
-                if(options.target === 'packaged') {
-                    validate = client.validatePackage;
-                }
+                var opts = {
+                    environment: options.environment,
+                    consumerKey: options.consumerKey,
+                    consumerSecret: options.consumerSecret,
+                    path: filepath,
+                    type: target
+                };
 
-                return validate(filepath)
-                .then(client.publish)
-                .then(function(appId) {
-                    grunt.log.ok('Successfully published the application '+appId);
-                    return callback();
-                }).catch(function(error) {
+                publish(filepath)
+                .then(function(app) {
+                    grunt.log.verbose.ok('Successfully published the application '+app.id);
+                    callback();
+                }, function(error) {
                     grunt.log.error(error);
                     callback(error);
                 });
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
                 done(false);
             }
             else {
-                grunt.log.writeln('All packages have been successfully published');
+                grunt.log.writeln('All apps have been successfully published');
                 done(true);
             }
         });
