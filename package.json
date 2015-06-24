@@ -1,7 +1,7 @@
 {
   "name": "grunt-marketplace",
   "description": "Grunt plugin to validate and publish webapps to the Firefox OS Marketplace",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/freaktechnik/grunt-marketplace",
   "author": {
     "name": "Martin Giger",

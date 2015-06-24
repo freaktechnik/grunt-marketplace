@@ -9,7 +9,7 @@
 
 'use strict';
 
-var { publish } = require("fx-marketplace-publish");
+var publish = require("fx-marketplace-publish").publish;
 var async = require("async");
 
 module.exports = function(grunt) {
