@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         var done = this.async();
 
         if (this.files.length < 1) {
-          grunt.verbose.warn('No packages to publish given.');
+            grunt.verbose.warn('No packages to publish given.');
         }
 
         var target = 'web';
