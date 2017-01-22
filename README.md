@@ -1,4 +1,6 @@
 # grunt-marketplace
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/freaktechnik/grunt-marketplace.svg)](https://greenkeeper.io/)
 > Grunt plugin to validate and publish webapps to the Firefox OS Marketplace.
 
 Currently WIP (mainly because the underlying module doesn't support packaged apps yet).
